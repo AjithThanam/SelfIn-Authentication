@@ -1,9 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
-import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
-import { DomToImage } from 'dom-to-image';
+
 
 @Component({
   selector: 'app-camera',
@@ -65,9 +63,6 @@ export class CameraComponent implements OnInit {
         });
     }
 
-    getBase64Image(img: any) {
-      
-    }
 
     handleError(error) {
         console.log('Error: ', error);
