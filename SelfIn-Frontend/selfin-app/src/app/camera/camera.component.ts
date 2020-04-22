@@ -1,6 +1,9 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import html2canvas from 'html2canvas';
+import { saveAs } from 'file-saver';
+import { DomToImage } from 'dom-to-image';
 
 @Component({
   selector: 'app-camera',
@@ -13,7 +16,7 @@ export class CameraComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
   videoWidth = 0;
-    videoHeight = 0;
+  videoHeight = 0;
     constraints = {
         video: {
             facingMode: "environment",
@@ -48,6 +51,22 @@ export class CameraComponent implements OnInit {
         this.renderer.setProperty(this.canvas.nativeElement, 'width', this.videoWidth);
         this.renderer.setProperty(this.canvas.nativeElement, 'height', this.videoHeight);
         this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 0, 0);
+        this.retrieveImage()
+    }
+
+    retrieveImage() {
+        let image = document.getElementById('picture');
+
+        html2canvas(image).then(function(canvas){
+            console.log(canvas.toDataURL("image/png",0.9));
+            canvas.toBlob(function (blob) {
+               saveAs(blob, "assets/screenshot.png");
+            });
+        });
+    }
+
+    getBase64Image(img: any) {
+      
     }
 
     handleError(error) {
