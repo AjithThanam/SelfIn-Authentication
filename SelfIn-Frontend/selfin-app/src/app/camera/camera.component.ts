@@ -19,7 +19,6 @@ export class CameraComponent implements OnInit {
   @ViewChild('video', { static: true }) videoElement: ElementRef;
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
-
   videoWidth = 0;
   videoHeight = 0;
     constraints = {
@@ -29,6 +28,8 @@ export class CameraComponent implements OnInit {
             height: { ideal: 2160 }
         }
     };
+
+    spokenText = "";
 
     constructor(private renderer: Renderer2, private backendService: HttpHandleService, private service: SpeechService) {
         componentContext = this;
@@ -47,6 +48,8 @@ export class CameraComponent implements OnInit {
             .subscribe(
             //listener
             (value) => {
+                this.spokenText = value;
+                this.capture();
                 console.log(value);
             },
             //errror
@@ -118,8 +121,8 @@ export class CameraComponent implements OnInit {
 
         console.log("Sending message to server");
         debugger;
-
-        this.backendService.uploadToServer(file, "let me in").subscribe(
+        console.log("(Request) " + this.spokenText);
+        this.backendService.uploadToServer(file, this.spokenText).subscribe(
             res => {
                 debugger;
                 console.log(res["response"])
