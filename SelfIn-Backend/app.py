@@ -4,12 +4,13 @@
 
 from google.cloud import automl
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import sys, os
 import time
 
 
 app = Flask(__name__)
-
+CORS(app)
 
 sent_file_name = 'face.jpg'
 user_dir = 'images'
@@ -105,6 +106,7 @@ def checkPassages(expected, obtained):
 #----- Define flask endpoints
 @app.route("/signin", methods=["GET", "POST"])
 def signIn():
+    response = None
     if request.method == "POST":
         if request.files:
             #"image" is the name given to the input field in the html
@@ -120,13 +122,15 @@ def signIn():
             # get google analysis for image
             google_result = get_Google_Prediction()
 
-            return jsonify(checkUser(google_result, passage))
+            response = checkUser(google_result, passage)
 
         else:
-            return jsonify({"response" : "No image was sent", "loggedin" : "false"})
+            response = {"response" : "No image was sent", "loggedin" : "false"}
             
     else:
-        return jsonify({"response" : "Only POST is supported", "loggedin" : "false"})
+        response = {"response" : "Only POST is supported", "loggedin" : "false"}
+
+    return jsonify(response)
 
 # ------------------ Endpoints DONE
 
