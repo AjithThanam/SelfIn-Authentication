@@ -25,8 +25,8 @@ export class CameraComponent implements OnInit {
     constraints = {
         video: {
             facingMode: "environment",
-            width: { ideal: 4096 },
-            height: { ideal: 2160 }
+            width: { ideal: 500 },
+            height: { ideal: 1000 }
         }
     };
 
