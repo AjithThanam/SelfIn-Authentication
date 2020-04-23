@@ -36,6 +36,11 @@ export class SpeechService {
         if (speech.results) {
           var result = speech.results[speech.resultIndex];
           var transcript = result[0].transcript;
+
+          let textBox = document.createElement('p')
+          const speechToText = speech.results[0][0].transcript
+          
+
           if (result.isFinal) {
             if (result[0].confidence < 0.3) {
               console.log("Unrecognized result - Please try again");
@@ -43,6 +48,7 @@ export class SpeechService {
             else {
               term = _.trim(transcript);
               console.log("You said: -> " + term);
+              textBox.textContent = speechToText
             }
           }
 

@@ -1,11 +1,10 @@
-import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild, NgZone } from '@angular/core';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
-
-
-
 import { HttpHandleService } from '../../services/http/http-handle.service'
 import { SpeechService } from '../../services/speech/speech.service'
+import * as _ from "lodash";
+
 
 
 var componentContext = null;
@@ -19,6 +18,8 @@ export class CameraComponent implements OnInit {
   @ViewChild('video', { static: true }) videoElement: ElementRef;
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
+  spokenText = "";
+
   videoWidth = 0;
   videoHeight = 0;
     constraints = {
@@ -29,9 +30,10 @@ export class CameraComponent implements OnInit {
         }
     };
 
-    spokenText = "";
+    
 
-    constructor(private renderer: Renderer2, private backendService: HttpHandleService, private service: SpeechService) {
+    
+    constructor(private zone: NgZone, private renderer: Renderer2, private backendService: HttpHandleService, private service: SpeechService) {
         componentContext = this;
     }
 
@@ -50,7 +52,9 @@ export class CameraComponent implements OnInit {
             (value) => {
                 this.spokenText = value;
                 this.capture();
+                let textBox = document.getElementById('textBox')
                 console.log(value);
+                //textBox.textContent ="You said: " + value +""
             },
             //errror
             (err) => {
@@ -65,7 +69,6 @@ export class CameraComponent implements OnInit {
                 console.log("--complete--");
             });
     }
-
 
     /*
     *Below thias point are all methods related to taking the screenshot
@@ -120,11 +123,9 @@ export class CameraComponent implements OnInit {
     sendImageToServer(file){
 
         console.log("Sending message to server");
-        debugger;
         console.log("(Request) " + this.spokenText);
         this.backendService.uploadToServer(file, this.spokenText).subscribe(
             res => {
-                debugger;
                 console.log(res["response"])
                 alert(res["response"])
             }

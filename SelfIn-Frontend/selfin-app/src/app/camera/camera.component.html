@@ -13,5 +13,8 @@
       <div class="p-1" style="visibility: hidden;">
          <canvas id='picture' #canvas class="vid"></canvas>
       </div>
+      <div *ngIf="spokenText != ''">
+         <p id="textBox"> You Said: <strong>{{spokenText}}</strong></p>
+      </div>
    </div>
 </div>
