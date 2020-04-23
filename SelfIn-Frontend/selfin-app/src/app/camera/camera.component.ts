@@ -3,6 +3,10 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 
 
+import { HttpHandleService} from '../../services/http/http-handle.service'
+
+
+var componentContext = null;
 @Component({
   selector: 'app-camera',
   templateUrl: './camera.component.html',
@@ -23,7 +27,9 @@ export class CameraComponent implements OnInit {
         }
     };
 
-    constructor(private renderer: Renderer2) {}
+    constructor(private renderer: Renderer2, private backendService: HttpHandleService) {
+        componentContext = this;
+    }
 
     ngOnInit() {
         this.startCamera();
@@ -52,15 +58,48 @@ export class CameraComponent implements OnInit {
         this.retrieveImage()
     }
 
+    /*
     retrieveImage() {
         let image = document.getElementById('picture');
 
         html2canvas(image).then(function(canvas){
             console.log(canvas.toDataURL("image/png",0.9));
             canvas.toBlob(function (blob) {
-               saveAs(blob, "assets/screenshot.png");
+               //saveAs(blob, "assets/screenshot.png");
+               
             });
         });
+    }
+    */
+
+    async retrieveImage() {
+        let image = document.getElementById('picture');
+        let canvas = await html2canvas(image);
+        
+        canvas.toBlob(function (blob) {
+            componentContext.sendImageToServer(blob);
+        });
+    }
+
+
+    sendImageToServer(file){
+
+        console.log("Sending message to server");
+        debugger;
+
+        this.backendService.uploadToServer(file, "let me in").subscribe(
+            res => {
+                debugger;
+                console.log(res["response"])
+                alert(res["response"])
+            }
+        );
+        
+/*
+        this.backendService.testEndpoint().subscribe(data => {
+            alert(data);
+        });
+        */
     }
 
 
