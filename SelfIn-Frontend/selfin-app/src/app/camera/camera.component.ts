@@ -3,7 +3,9 @@ import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 
 
-import { HttpHandleService} from '../../services/http/http-handle.service'
+
+import { HttpHandleService } from '../../services/http/http-handle.service'
+import { SpeechService } from '../../services/speech/speech.service'
 
 
 var componentContext = null;
@@ -17,6 +19,7 @@ export class CameraComponent implements OnInit {
   @ViewChild('video', { static: true }) videoElement: ElementRef;
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
+
   videoWidth = 0;
   videoHeight = 0;
     constraints = {
@@ -27,7 +30,7 @@ export class CameraComponent implements OnInit {
         }
     };
 
-    constructor(private renderer: Renderer2, private backendService: HttpHandleService) {
+    constructor(private renderer: Renderer2, private backendService: HttpHandleService, private service: SpeechService) {
         componentContext = this;
     }
 
@@ -35,6 +38,35 @@ export class CameraComponent implements OnInit {
         this.startCamera();
     }
 
+    listen(){
+        this.activateSpeech();
+      }
+    
+    activateSpeech(): void {
+        this.service.listen('en-US')
+            .subscribe(
+            //listener
+            (value) => {
+                console.log(value);
+            },
+            //errror
+            (err) => {
+                console.log(err);
+                if (err.error == "no-speech") {
+                    console.log("--restatring service--");
+                    this.activateSpeech();
+                }
+            },
+            //completion
+            () => {
+                console.log("--complete--");
+            });
+    }
+
+
+    /*
+    *Below thias point are all methods related to taking the screenshot
+    */
     startCamera() {
         if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
             navigator.mediaDevices.getUserMedia(this.constraints).then(this.attachVideo.bind(this)).catch(this.handleError);
