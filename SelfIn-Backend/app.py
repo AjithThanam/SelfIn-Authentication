@@ -34,8 +34,8 @@ def getResponse(name, score):
 
 
 # --------------------- Work for google
-project_id = 'soen357-loginengine'
-model_id = 'ICN8093034501082447872'
+project_id = 'soy-audio-259219'
+model_id = 'ICN8694265051336409088'
 
 pathname = os.path.dirname(sys.argv[0])      
 file_path = os.path.abspath(pathname) + user_face_data
@@ -83,7 +83,9 @@ def checkUser(google_result, passage):
     person_detect = google_result[0].display_name
     person_detect_confidence = google_result[0].classification.score
 
-    print("(checkUser) name: " + person_detect + " conf: " +  str(person_detect_confidence))
+    print("INFO")
+    print(person_detect)
+    print(person_detect_confidence)
 
     if person_detect_confidence > 0.5:
         passageExpected = db[person_detect]
