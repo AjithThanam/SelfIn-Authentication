@@ -87,6 +87,9 @@ def checkUser(google_result, passage):
     print(person_detect)
     print(person_detect_confidence)
 
+    if person_detect == 'Person':
+        return {"response" : "User not recognized", "loggedin" : "false"}
+
     if person_detect_confidence > 0.5:
         passageExpected = db[person_detect]
 
