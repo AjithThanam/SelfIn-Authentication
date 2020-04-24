@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HttpHandleService {
 
-  private serverURL = "http://127.0.0.1:5000/signin";
+  private serverURL = "https://be1c234c.ngrok.io/signin";
   private postField_face = "image";
   private postField_passage = "passage";
 
@@ -23,6 +23,7 @@ export class HttpHandleService {
     return this.http.post(this.serverURL, info);
   }
 
+  //this is renuchans childhood
   testEndpoint(){
     return this.http.get("https://www.dragonfable.com");
   }

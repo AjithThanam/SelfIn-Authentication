@@ -19,6 +19,7 @@ export class CameraComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
   spokenText = "";
+  authenticated = true
 
   videoWidth = 0;
   videoHeight = 0;
@@ -26,13 +27,12 @@ export class CameraComponent implements OnInit {
         video: {
             facingMode: "environment",
             width: { ideal: 500 },
-            height: { ideal: 1000 }
+            height: { ideal: 720 }
         }
     };
 
-    
+    //REFERENCE: https://www.dev6.com/angular/capturing-camera-images-with-angular/
 
-    
     constructor(private zone: NgZone, private renderer: Renderer2, private backendService: HttpHandleService, private service: SpeechService) {
         componentContext = this;
     }
@@ -92,32 +92,45 @@ export class CameraComponent implements OnInit {
     capture() {
         this.renderer.setProperty(this.canvas.nativeElement, 'width', this.videoWidth);
         this.renderer.setProperty(this.canvas.nativeElement, 'height', this.videoHeight);
-        this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 0, 0);
+        console.log(this.videoWidth)
+        console.log(this.videoHeight)
+        this.canvas.nativeElement.getContext('2d').drawImage(this.videoElement.nativeElement, 0, 0)
         this.retrieveImage()
-    }
-
-    /*
-    retrieveImage() {
-        let image = document.getElementById('picture');
-
-        html2canvas(image).then(function(canvas){
-            console.log(canvas.toDataURL("image/png",0.9));
-            canvas.toBlob(function (blob) {
-               //saveAs(blob, "assets/screenshot.png");
-               
-            });
-        });
-    }
-    */
-
-    async retrieveImage() {
-        let image = document.getElementById('picture');
-        let canvas = await html2canvas(image);
         
-        canvas.toBlob(function (blob) {
-            componentContext.sendImageToServer(blob);
-        });
     }
+
+    
+    retrieveImage(){
+        let image = document.getElementById('picture') as HTMLCanvasElement
+        let imgURL = image.toDataURL()
+        let a = document.createElement("a")
+
+        a.href = imgURL
+        a.download = 'canvas-download.png'
+        a.click()
+    }
+
+
+    // retrieveImage2() {
+    //     let image = document.getElementById('picture') as HTMLCanvasElement
+    //     html2canvas(image).then(function(canvas){
+
+    //         canvas.toBlob(function (blob) {
+    //            saveAs(blob, "assets/screenshot.jpeg");
+    //         });
+    //     });
+    // }
+    
+
+    // async retrieveImage() {
+    //     let image = document.getElementById('picture');
+    //     let canvas = await html2canvas(image);
+        
+    //     canvas.toBlob(function (blob) {
+    //         componentContext.sendImageToServer(blob);
+    //         saveAs(blob, "assets/screenshot.png");
+    //     });
+    // }
 
 
     sendImageToServer(file){
@@ -127,7 +140,10 @@ export class CameraComponent implements OnInit {
         this.backendService.uploadToServer(file, this.spokenText).subscribe(
             res => {
                 console.log(res["response"])
-                alert(res["response"])
+                console.log(res)
+                this.authenticated = res["loggedin"]
+                console.log(this.authenticated)
+                //alert(res["response"])
             }
         );
         

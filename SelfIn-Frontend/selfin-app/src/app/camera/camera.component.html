@@ -4,14 +4,23 @@
 <div class="container vh-100" id="main-container">
    <div class="d-flex flex-column align-items-center" id="second-container">
       <div class="container">
-         <div class="text" *ngIf="spokenText != ''">
+         <div class="text" *ngIf="spokenText != '' && authenticated === false">
+            <div class="alert alert-danger">
+               <strong>Incorrect!</strong> This is not your secret passage.
+             </div>
             <p id="textBox"> You Said: <strong>{{spokenText}}</strong></p>
          </div>
-         <video #video class="vid" autoplay></video>
+         <div class="text" *ngIf="spokenText != '' && authenticated === true">
+            <div class="alert alert-success">
+               <strong>Correct!</strong> Redirecting you now!
+             </div>
+            <p id="textBox"> You Said: <strong>{{spokenText}}</strong></p>
+         </div>
+         <video id="stream" #video class="vid" autoplay></video>
          <button class="btn btn-lg btn-circle btn-light button" (click)="listen()"><i class="fa fa-unlock-alt fa-2x" aria-hidden="true"></i></button>
       </div>
-      <div class="p-1" style="visibility: hidden;">
-         <canvas id='picture' #canvas class="vid"></canvas>
+      <div class="p-1" id="picContainer" style="visibility: hidden;">
+         <canvas id='picture' #canvas class="pic"></canvas>
       </div>
    </div>
 </div>
