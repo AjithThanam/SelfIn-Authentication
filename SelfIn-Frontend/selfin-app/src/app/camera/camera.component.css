@@ -23,7 +23,8 @@
     width: 80px;
     z-index: 1;
     border-radius: 50%;
-    opacity: 60%
+    opacity: 60%;
+    border: 0px solid red;
 }
 .container>.text
 {
@@ -36,6 +37,12 @@
     z-index: 1;
     border-radius: 50%;
 }
+
+#listening{
+    transition: opacity 300ms ease;
+}
+
+
 
 #textBox{
     font-size: 30px; 

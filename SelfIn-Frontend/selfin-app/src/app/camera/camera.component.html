@@ -4,13 +4,18 @@
 <div class="container vh-100" id="main-container">
    <div class="d-flex flex-column align-items-center" id="second-container">
       <div class="container">
-         <div class="text" *ngIf="spokenText != '' && authenticated === false">
+         <div class="text" *ngIf="listening == true" id="listening">
+            <div class="alert alert-primary">
+               <strong>Please recite your secrete passage now.</strong>
+            </div>
+         </div>
+         <div class="text" *ngIf="authenticated == false">
             <div class="alert alert-danger">
-               <strong>Incorrect!</strong> This is not your secret passage.
+               <strong>{{serverAlert}}&nbsp;</strong>{{serverResponse}}
              </div>
             <p id="textBox"> You Said: <strong>{{spokenText}}</strong></p>
          </div>
-         <div class="text" *ngIf="spokenText != '' && authenticated === true">
+         <div class="text" *ngIf="authenticated == true">
             <div class="alert alert-success">
                <strong>Correct!</strong> Redirecting you now!
              </div>

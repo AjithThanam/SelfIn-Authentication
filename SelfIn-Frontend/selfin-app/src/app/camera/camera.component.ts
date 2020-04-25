@@ -19,7 +19,10 @@ export class CameraComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef;
 
   spokenText = "";
-  authenticated = true
+  serverResponse = "";
+  serverAlert = "";
+  authenticated = null;
+  listening = false;
 
   videoWidth = 0;
   videoHeight = 0;
@@ -43,6 +46,8 @@ export class CameraComponent implements OnInit {
 
     listen(){
         this.activateSpeech();
+        this.listening = true
+        this.authenticated = null
       }
     
     activateSpeech(): void {
@@ -67,6 +72,7 @@ export class CameraComponent implements OnInit {
             //completion
             () => {
                 console.log("--complete--");
+                this.listening = false
             });
     }
 
@@ -99,29 +105,29 @@ export class CameraComponent implements OnInit {
         
     }
 
-    
+
     retrieveImage(){
         let image = document.getElementById('picture') as HTMLCanvasElement
         let imgURL = image.toDataURL()
-        let a = document.createElement("a")
+        let blob = this.dataURLtoBlob(imgURL)
 
-        a.href = imgURL
-        a.download = 'canvas-download.png'
-        a.click()
+        // saveAs(blob, "blop-png.png")
+        // saveAs(blob, "blop-jpeg.jpeg")
+        componentContext.sendImageToServer(blob);
     }
 
+    //REFERENCE:  https://stackoverflow.com/a/30407959/1154380
+    dataURLtoBlob(dataurl) {
+        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+        while(n--){
+            u8arr[n] = bstr.charCodeAt(n);
+        }
 
-    // retrieveImage2() {
-    //     let image = document.getElementById('picture') as HTMLCanvasElement
-    //     html2canvas(image).then(function(canvas){
+        return new Blob([u8arr], {type:mime});
+    }
 
-    //         canvas.toBlob(function (blob) {
-    //            saveAs(blob, "assets/screenshot.jpeg");
-    //         });
-    //     });
-    // }
     
-
     // async retrieveImage() {
     //     let image = document.getElementById('picture');
     //     let canvas = await html2canvas(image);
@@ -134,16 +140,23 @@ export class CameraComponent implements OnInit {
 
 
     sendImageToServer(file){
-
         console.log("Sending message to server");
         console.log("(Request) " + this.spokenText);
+        this.authenticated = null;
         this.backendService.uploadToServer(file, this.spokenText).subscribe(
             res => {
-                console.log(res["response"])
+                this.serverResponse = res["response"]
+                this.serverAlert = res["alert"]
+                this.authenticated = (res["loggedin"] == 'true')
                 console.log(res)
-                this.authenticated = res["loggedin"]
+                console.log(res["alert"])
                 console.log(this.authenticated)
-                //alert(res["response"])
+                
+                // if(this.authenticated)
+                //     document.getElementById('correct').style.display = 'block' 
+                //  else 
+                //   document.getElementById('incorrect').style.display = 'block';
+                
             }
         );
         
