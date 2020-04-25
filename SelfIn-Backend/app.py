@@ -35,7 +35,7 @@ def getResponse(name, score):
 
 # --------------------- Work for google
 project_id = 'soy-audio-259219'
-model_id = 'ICN8694265051336409088'
+model_id = 'ICN1415322153598844928'
 
 pathname = os.path.dirname(sys.argv[0])      
 file_path = os.path.abspath(pathname) + user_face_data
@@ -88,22 +88,44 @@ def checkUser(google_result, passage):
     print(person_detect_confidence)
 
     if person_detect == 'Person':
-        return {"response" : "User not recognized", "loggedin" : "false"}
+        return {"response" : "User is not recognized", "loggedin" : "false", "alert":"Erorr!"}
 
     if person_detect_confidence > 0.5:
         passageExpected = db[person_detect]
 
         if checkPassages(passageExpected, passage):
-            return {"response" : "User recognized, Welcome " + person_detect, "loggedin" : "true"}
+            return {"response" : "User recognized, Welcome " + person_detect, "loggedin" : "true", "person":person_detect}
         else:
-            return {"response" : "User has wrong passage", "loggedin" : "false"}
+            return {"response" : "This is not your passage", "loggedin" : "false", "alert":"Incorrect!"}
     else:
-        return {"response" : "User not recognized", "loggedin" : "false"}
+        return {"response" : "User is not recognized", "loggedin" : "false", "alert":"Erorr!"}
 
 
 def checkPassages(expected, obtained):
     return expected == obtained
 
+
+def checkUser2(google_result, passage):
+
+    person_detect = google_result
+    person_detect_confidence = 0.6
+
+    print("INFO")
+    print(person_detect)
+    print(person_detect_confidence)
+
+    if person_detect == 'Person':
+        return {"response" : "User is not recognized", "loggedin" : "false", "alert":"Erorr!"}
+
+    if person_detect_confidence > 0.5:
+        passageExpected = db[person_detect]
+
+        if checkPassages(passageExpected, passage):
+            return {"response" : "User recognized, Welcome " + person_detect, "loggedin" : "true", "person":person_detect}
+        else:
+            return {"response" : "This is not your passage", "loggedin" : "false", "alert":"Incorrect!"}
+    else:
+        return {"response" : "User is not recognized", "loggedin" : "false", "alert":"Erorr!"}
 
 
 
@@ -128,7 +150,8 @@ def signIn():
             google_result = get_Google_Prediction()
 
             response = checkUser(google_result, passage)
-
+            #response = checkUser2('Ajith', passage)
+			
         else:
             response = {"response" : "No image was sent", "loggedin" : "false"}
             
