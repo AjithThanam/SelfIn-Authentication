@@ -6,7 +6,7 @@ The puropse of this prototype is to help measure the effectiveness of FVS(Face-V
   
 ### System Overview
 
-Selfin is composed of 2 independent applications: a frontend and backend. The frontend application is a simple Angular 8 webapp used to depict the integration of Selfin's functionality with any regular website. The backend application is web service built using python and is used to identify and validate user requests when signing in with "Selfin".
+Selfin is composed of 2 independent applications: a frontend and backend. The frontend application is a simple Angular 9 webapp used to depict the integration of Selfin's functionality with any regular website. The backend application is web service built using python and is used to identify and validate user requests when signing in with "Selfin".
 
 #### Authors
 Ajith Thanam <br />
