@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "soy-audio-259219",
+  "private_key_id": "63ececed7eafaf3a0238a09900f4a2670baa96f5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCUTzjEEomRgTxc\nq+bjD0k5iiTfEIa7y9a+mIughdJONqS21sXX6EpsZyMCerBeI0UuenXO8yhgpyYj\n6hIMIxQh1YUpxGEz9ARl87U8CB23BZnS+YP9/1+1/FPTDKutg8LTgJKqpZw6fOb6\n0PSkFCXj7akpJ0QcRqmZsWc0LTEmIlLEW7Put/SoCpP4bEfwxjByldBocBNT7dr7\n2E+nYU6CXMvuhNqHnsyWt/zMgPsEwaEiAvNG6OUIbvUPYXYsHq/PwJolOkZZ3Gyr\nkCYyFslbyEvf175edw8H1f0KfUyaV4qqaMGTHKgdbtP5fx8oKDl00MxhTsBX57/G\nP3opdtavAgMBAAECggEAFJQXftFJqFhjzUIG8+uLkAHUkuUCpO0oO2MEQL5Ay5x2\nZ25OnmI7bWY0K+RlM3K2ZzgTv6bqq9qVhrc0UN3PLdCoPP7kM+bAc3sI4y8HHH2Y\n9fasM2KrX5+G7ApeieF1943oC+iV0GHDVPsIbvnitgkkhzLNFxVQ9CPy+4DnyHAV\npbbUwY3SUzWkAO5CtvcpEc5zWstUwhXhPGM3WSrJhg7ylZeud99cBwTzxFEtIVbA\nuNowz7vE13dRJzWqRfK+LJ+3CgZwH4ioajS/UAN6vsDrbTkI3j9EYafCgctTb2Fs\nXM3NvL/HZTY9wj7UwH1FRmamNowPhXnzfR5v4A2t3QKBgQDL7mH6RnG3GUXmJK4c\nbfefzMXnUv1kPvSSkqhhKYnKk5kKAzwYXBC6qitO27JPYmecOdcFsbqZ1lEmWyog\nfHtruFHDnhFYT047Xx7KR7o7ck5I0J/6uNA5zmv3DroFWh2PquLRU1L7snVvRRhV\n0Vk26PKzGds/ufFpMHpU9qlfEwKBgQC6LTgVKyaWQ4FDWrXGzhMg0J3dpa3to1IC\nQ0D4ksFFGhAvo+lV7JyrbRP0qjfDZN76r06bT4tus+9Po6dhS6ttNhRaW17Ak5r9\nNQtAVVEW1jAYB1YcCU5OLnHqWcuMbbXCAxufEksyWeVrncr+VxqFKqzNKipY+l80\nj7gyEG1xdQKBgGKUGUiiRNX9oYxersuPXOQiWIg51cNfq1ovCrXtHm6OaqwsZCBi\nYLPbDpRQHyHAr9UVIJvgDhPPResEppiNlBu+PcgR4NCPhYGtuXSOt7eEydLpBmxs\najuHTSlgNQvhQ+ju8jW90Z9Z5Oqku97AFCA2+xsYpKNpfwkaJghsM/OBAoGAEPTn\nY74vYIY7crgDUF0ajuWRS0u4wKkcYgpgE4PCSJnsGXqzWNkZF9/ybllGhOxeBrUK\n0sh26ZlH1ZgROaJbtbG0PtqNkbqf5in7oVtj7FGLxdR9OkZ6tFI0m+Sbzml7oXUJ\nAf73jFl1tMyFXY7vYmuVm4YYn0wGedIRM7YdUbUCgYBF1Z7Nnt7gFRBGscmxFF+Q\nvpHBDg1MtmQz+vSudUOQrYXsg3SGdpOQfy889z86juLwpi9g0l+lSvPw72tMC9aA\ndGrfjmJ/G7BEYGk0pZ+R1ecrOhfWBB11AXEeuYE+4tNAdl9D9CO5AN3Aj0A2wF8o\n3YjXrFEPlsNm9V996eBHxg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "soen357-app@soy-audio-259219.iam.gserviceaccount.com",
+  "client_id": "110423034178704211008",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/soen357-app%40soy-audio-259219.iam.gserviceaccount.com"
+}
