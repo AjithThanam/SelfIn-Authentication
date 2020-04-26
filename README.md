@@ -23,7 +23,7 @@ Select "Download the Cloud SDK installer"
 
 2. Setup the following environment variable
 
-export GOOGLE_APPLICATION_CREDENTIALS="absolute-path-to-key-file" (file in the "key" directory)
+export GOOGLE_APPLICATION_CREDENTIALS="absolute-path-to-key-file/key/soen357-key.json" (file in the "key" directory)
 export PROJECT_ID="soy-audio-259219"
 
 3. Switch into the "Selfin-Backend" folder and run the python app by entering the following command "python app.py"
