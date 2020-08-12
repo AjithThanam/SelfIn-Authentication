@@ -2,7 +2,7 @@
 The following project is a prototype of "Selfin" an AI based authorization module and our SOEN 357 final project submission. The following repository contains all code required to build and run "Selfin".
 
 ### Purpose 
-The puropse of this prototype is to help measure the effectiveness of FVS(Face-Voice-Speech) credentials against traditional text based credentials. 
+The puropse of this prototype is to help measure the effectiveness of FVS(Face-Voice-Speech) credentials against traditional text based credentials.  
   
 ### System Overview
 
